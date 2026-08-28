@@ -87,30 +87,64 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     >
       <div
         style={{
-          position: "absolute",
-
-          // Important:
-          // start the strip from the LEFT EDGE
-          left: 0,
-          top: "50%",
-
-          display: "flex",
-          gap: GAP,
-          alignItems: "center",
-
-          transform: `
+            position: "absolute",
+            left: 0,
+            top: "50%",
+            display: "flex",
+            gap: GAP,
+            alignItems: "center",
+            transform: `
             translateX(${translateX}px)
             translateY(-50%)
-          `,
+            `,
         }}
-      >
-        {repeatedCities.map((city, index) => (
-          <CityCard
-            key={`${city.id}-${index}`}
-            city={city}
-          />
-        ))}
-      </div>
+        >
+        {repeatedCities.map((city, index) => {
+            const cardCenterX =
+            translateX +
+            index * STEP +
+            CARD_WIDTH / 2;
+
+            const screenCenterX = width / 2;
+
+            const distanceFromCenter = Math.abs(
+            cardCenterX - screenCenterX
+            );
+
+            const scale = interpolate(
+            distanceFromCenter,
+            [0, STEP],
+            [1, 0.82],
+            {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+            }
+            );
+
+            const opacity = interpolate(
+            distanceFromCenter,
+            [0, STEP * 1.3],
+            [1, 0.45],
+            {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+            }
+            );
+
+            return (
+            <div
+                key={`${city.id}-${index}`}
+                style={{
+                transform: `scale(${scale})`,
+                opacity,
+                flexShrink: 0,
+                }}
+            >
+                <CityCard city={city} />
+            </div>
+            );
+        })}
+        </div>
     </AbsoluteFill>
   );
 };

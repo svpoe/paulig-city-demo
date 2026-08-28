@@ -40,7 +40,7 @@ export const cities: City[] = [
   },
   {
     id: "la",
-    city: "LA",
+    city: "Los Angeles",
     roast: "Californian Style Roast",
     tastingNote: "Bright · Notes of citrus",
     color: "#E99578",
