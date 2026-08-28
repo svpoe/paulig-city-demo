@@ -1,7 +1,9 @@
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -24,50 +26,43 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   const startIndex = 0;
   const endIndex = cities.length - 1;
 
-  // Center the first city
+  // -------------------------
+  // CARD POSITIONS
+  // -------------------------
+
   const startX =
     width / 2 -
     CARD_WIDTH / 2 -
     startIndex * STEP;
 
-  // Center the final city
   const endX =
     width / 2 -
     CARD_WIDTH / 2 -
     endIndex * STEP;
 
-  // Center the selected city
   const targetX =
     width / 2 -
     CARD_WIDTH / 2 -
     selectedIndex * STEP;
 
-  /*
-   * TIMING
-   *
-   * 0–75:
-   * Scan through all cities
-   *
-   * 75–125:
-   * Travel back toward Barcelona
-   *
-   * 125+:
-   * Small spring settle
-   */
+  // -------------------------
+  // TIMING
+  // -------------------------
 
+  // Forward scroll ends here
   const forwardEnd = 75;
+
+  // Return toward Barcelona ends here
   const reverseEnd = 125;
 
-  // Slight movement past Los Angeles
   const endOvershoot = -100;
-
-  // Slight movement past Barcelona before settling
   const targetOvershoot = -80;
 
-  /*
-   * PHASE 1:
-   * Forward scan
-   */
+  // -------------------------
+  // PHASE 1:
+  // SCROLL FORWARD
+  // -------------------------
+
   const forwardX = interpolate(
     frame,
     [0, forwardEnd],
@@ -78,14 +73,11 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     }
   );
 
-  /*
-   * PHASE 2:
-   * Controlled reverse movement
-   *
-   * This is intentionally interpolate(),
-   * not spring(), so we control how long
-   * the return journey takes.
-   */
+  // -------------------------
+  // PHASE 2:
+  // RETURN LEFT
+  // -------------------------
+
   const reverseX = interpolate(
     frame,
     [forwardEnd, reverseEnd],
@@ -96,10 +88,11 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     }
   );
 
-  /*
-   * PHASE 3:
-   * Small spring into final Barcelona position
-   */
+  // -------------------------
+  // PHASE 3:
+  // SPRING ONTO BARCELONA
+  // -------------------------
+
   const settleFrame = Math.max(
     0,
     frame - reverseEnd
@@ -121,9 +114,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     [targetX + targetOvershoot, targetX]
   );
 
-  /*
-   * Choose which phase controls the carousel
-   */
+  // Choose current carousel position
   const translateX =
     frame <= forwardEnd
       ? forwardX
@@ -131,12 +122,52 @@ export const CityCarousel = ({selectedIndex}: Props) => {
         ? reverseX
         : settleX;
 
+  // -------------------------
+  // CURSOR MOVEMENT
+  // -------------------------
+
+  /*
+   * During forward movement:
+   * cursor moves toward the right.
+   *
+   * During reverse:
+   * cursor travels toward the left.
+   */
+  const cursorX = interpolate(
+    frame,
+    [0, forwardEnd, reverseEnd],
+    [180, 320, -320],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  /*
+   * Fade cursor away after Barcelona
+   * has been selected.
+   */
+  const cursorOpacity = interpolate(
+    frame,
+    [reverseEnd, reverseEnd + 20],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  // -------------------------
+  // RENDER
+  // -------------------------
+
   return (
     <AbsoluteFill
       style={{
         overflow: "hidden",
       }}
     >
+      {/* CAROUSEL */}
       <div
         style={{
           position: "absolute",
@@ -154,9 +185,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
         }}
       >
         {cities.map((city, index) => {
-          /*
-           * Find each card's center position
-           */
+          // Find card position relative to screen center
           const cardCenterX =
             translateX +
             index * STEP +
@@ -168,10 +197,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             cardCenterX - screenCenterX
           );
 
-          /*
-           * Cards grow as they approach
-           * the center.
-           */
+          // Center card gets larger
           const scale = interpolate(
             distanceFromCenter,
             [0, STEP],
@@ -182,10 +208,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             }
           );
 
-          /*
-           * Cards also become more opaque
-           * near the center.
-           */
+          // Center card gets more visible
           const opacity = interpolate(
             distanceFromCenter,
             [0, STEP * 1.3],
@@ -210,6 +233,32 @@ export const CityCarousel = ({selectedIndex}: Props) => {
           );
         })}
       </div>
+
+      {/* CURSOR */}
+      <Img
+        src={staticFile("icons/cursor.png")}
+        style={{
+          position: "absolute",
+
+          width: 80,
+          left: "80%",
+          top: "68%",
+          transform: "none",
+
+        //   width: 80,
+        //   // Start from horizontal center
+        //   left: "50%",
+        //   // Below the carousel
+        //   top: "76%",
+
+          opacity: cursorOpacity,
+
+        //   transform: `
+        //     translateX(${cursorX}px)
+        //     rotate(-8deg)
+        //   `,
+        }}
+      />
     </AbsoluteFill>
   );
 };

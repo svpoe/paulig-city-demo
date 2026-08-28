@@ -9,7 +9,6 @@ export type City = {
 };
 
 export const cities: City[] = [
-
   {
     id: "tokyo",
     city: "TOKYO",
@@ -20,7 +19,7 @@ export const cities: City[] = [
     packageSrc: "packages/tokyo.png",
   },
 
-    {
+  {
     id: "paris",
     city: "PARIS",
     roast: "French Style Roast",
@@ -29,7 +28,6 @@ export const cities: City[] = [
     textColor: "#FFFFFF",
     packageSrc: "packages/paris.png",
   },
-  
   {
     id: "barcelona",
     city: "BARCELONA",
@@ -39,8 +37,6 @@ export const cities: City[] = [
     textColor: "#151515",
     packageSrc: "packages/barcelona.png",
   },
-
-
   {
     id: "la",
     city: "Los Angeles",
