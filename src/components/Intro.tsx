@@ -6,6 +6,8 @@ import {
   useCurrentFrame,
 } from "remotion";
 
+import {SearchBar} from "./SearchBar";
+
 export const Intro = () => {
   const frame = useCurrentFrame();
 
@@ -34,10 +36,10 @@ export const Intro = () => {
     [12, 30],
     [0, 35],
     {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
     }
-);
+  );
 
   return (
     <AbsoluteFill
@@ -48,6 +50,9 @@ export const Intro = () => {
         opacity,
       }}
     >
+      <SearchBar />
+
+      {/* Headline */}
       <div
         style={{
           textAlign: "center",
@@ -69,6 +74,7 @@ export const Intro = () => {
         </div>
       </div>
 
+      {/* Cursor */}
       <Img
         src={staticFile("icons/cursor.png")}
         style={{
@@ -76,7 +82,6 @@ export const Intro = () => {
           width: 90,
           left: "61%",
           top: "62%",
-        //   transform: "rotate(-8deg)",
           transform: `translateX(${cursorX}px) rotate(-8deg)`,
         }}
       />

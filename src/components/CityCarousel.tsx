@@ -10,6 +10,7 @@ import {
 
 import {cities} from "../data/cities";
 import {CityCard} from "./CityCard";
+import {SearchBar} from "./SearchBar";
 
 const CARD_WIDTH = 620;
 const GAP = 50;
@@ -59,8 +60,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   const targetOvershoot = -80;
 
   // -------------------------
-  // PHASE 1:
-  // SCROLL FORWARD
+  // PHASE 1: SCROLL FORWARD
   // -------------------------
 
   const forwardX = interpolate(
@@ -74,8 +74,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   );
 
   // -------------------------
-  // PHASE 2:
-  // RETURN LEFT
+  // PHASE 2: RETURN LEFT
   // -------------------------
 
   const reverseX = interpolate(
@@ -89,8 +88,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   );
 
   // -------------------------
-  // PHASE 3:
-  // SPRING ONTO BARCELONA
+  // PHASE 3: SPRING SETTLE
   // -------------------------
 
   const settleFrame = Math.max(
@@ -114,7 +112,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     [targetX + targetOvershoot, targetX]
   );
 
-  // Choose current carousel position
+  // Choose the current carousel position
   const translateX =
     frame <= forwardEnd
       ? forwardX
@@ -126,13 +124,8 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   // CURSOR MOVEMENT
   // -------------------------
 
-  /*
-   * During forward movement:
-   * cursor moves toward the right.
-   *
-   * During reverse:
-   * cursor travels toward the left.
-   */
+  // Cursor moves right during forward scroll,
+  // then moves left during the return.
   const cursorX = interpolate(
     frame,
     [0, forwardEnd, reverseEnd],
@@ -143,10 +136,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     }
   );
 
-  /*
-   * Fade cursor away after Barcelona
-   * has been selected.
-   */
+  // Fade cursor after Barcelona is selected.
   const cursorOpacity = interpolate(
     frame,
     [reverseEnd, reverseEnd + 20],
@@ -167,17 +157,18 @@ export const CityCarousel = ({selectedIndex}: Props) => {
         overflow: "hidden",
       }}
     >
+      {/* Fixed website search bar */}
+      <SearchBar />
+
       {/* CAROUSEL */}
       <div
         style={{
           position: "absolute",
           left: 0,
           top: "50%",
-
           display: "flex",
           gap: GAP,
           alignItems: "center",
-
           transform: `
             translateX(${translateX}px)
             translateY(-50%)
@@ -242,8 +233,12 @@ export const CityCarousel = ({selectedIndex}: Props) => {
           width: 80,
           left: "50%",
           top: "68%",
-          transform: `translateX(${cursorX}px) rotate(-8deg) scaleX(${frame > forwardEnd ? -1 : 1})`,
           opacity: cursorOpacity,
+          transform: `
+            translateX(${cursorX}px)
+            rotate(-8deg)
+            scaleX(${frame > forwardEnd ? -1 : 1})
+          `,
         }}
       />
     </AbsoluteFill>
