@@ -5,3 +5,26 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+
+# Dependencies
+node_modules/
+
+# Remotion output
+out/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/

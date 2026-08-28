@@ -1,25 +1,14 @@
-import { CalculateMetadataFunction, Composition } from "remotion";
-
-type Props = {};
-
-const calculateMetadata: CalculateMetadataFunction<Props> = () => {
-  return {};
-};
+import {AbsoluteFill} from "remotion";
+import {CityCarousel} from "./components/CityCarousel";
 
 export const MyComposition = () => {
   return (
-    <Composition
-      id="MyComp"
-      component={MyComponent}
-      durationInFrames={60}
-      fps={30}
-      width={1280}
-      height={720}
-      calculateMetadata={calculateMetadata}
-    />
+    <AbsoluteFill
+      style={{
+        backgroundColor: "#f4efe7",
+      }}
+    >
+      <CityCarousel selectedIndex={1} />
+    </AbsoluteFill>
   );
-};
-
-export const MyComponent: React.FC<Props> = () => {
-  return null;
 };
