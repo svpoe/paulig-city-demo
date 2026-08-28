@@ -24,27 +24,50 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   const startIndex = 0;
   const endIndex = cities.length - 1;
 
+  // Center the first city
   const startX =
     width / 2 -
     CARD_WIDTH / 2 -
     startIndex * STEP;
 
+  // Center the final city
   const endX =
     width / 2 -
     CARD_WIDTH / 2 -
     endIndex * STEP;
 
+  // Center the selected city
   const targetX =
     width / 2 -
     CARD_WIDTH / 2 -
     selectedIndex * STEP;
 
-  // Forward scan through all cities
-  const forwardEnd = 75;
+  /*
+   * TIMING
+   *
+   * 0–75:
+   * Scan through all cities
+   *
+   * 75–125:
+   * Travel back toward Barcelona
+   *
+   * 125+:
+   * Small spring settle
+   */
 
-  // Slight overshoot beyond the last city
+  const forwardEnd = 75;
+  const reverseEnd = 125;
+
+  // Slight movement past Los Angeles
   const endOvershoot = -100;
 
+  // Slight movement past Barcelona before settling
+  const targetOvershoot = -80;
+
+  /*
+   * PHASE 1:
+   * Forward scan
+   */
   const forwardX = interpolate(
     frame,
     [0, forwardEnd],
@@ -55,37 +78,58 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     }
   );
 
-  // Reverse back to selected city
-  const reverseFrame = Math.max(
-    0,
-    frame - forwardEnd
+  /*
+   * PHASE 2:
+   * Controlled reverse movement
+   *
+   * This is intentionally interpolate(),
+   * not spring(), so we control how long
+   * the return journey takes.
+   */
+  const reverseX = interpolate(
+    frame,
+    [forwardEnd, reverseEnd],
+    [endX + endOvershoot, targetX + targetOvershoot],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
   );
 
-  const reverseSpring = spring({
-    frame: reverseFrame,
+  /*
+   * PHASE 3:
+   * Small spring into final Barcelona position
+   */
+  const settleFrame = Math.max(
+    0,
+    frame - reverseEnd
+  );
+
+  const settle = spring({
+    frame: settleFrame,
     fps,
     config: {
-    damping: 18,
-    stiffness: 25,
-    mass: 1.2,
+      damping: 16,
+      stiffness: 85,
+      mass: 0.9,
     },
-    // config: {
-    //   damping: 14,
-    //   stiffness: 110,
-    //   mass: 0.8,
-    // },
   });
 
-  const reverseX = interpolate(
-    reverseSpring,
+  const settleX = interpolate(
+    settle,
     [0, 1],
-    [endX + endOvershoot, targetX]
+    [targetX + targetOvershoot, targetX]
   );
 
+  /*
+   * Choose which phase controls the carousel
+   */
   const translateX =
     frame <= forwardEnd
       ? forwardX
-      : reverseX;
+      : frame <= reverseEnd
+        ? reverseX
+        : settleX;
 
   return (
     <AbsoluteFill
@@ -98,6 +142,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
           position: "absolute",
           left: 0,
           top: "50%",
+
           display: "flex",
           gap: GAP,
           alignItems: "center",
@@ -109,7 +154,9 @@ export const CityCarousel = ({selectedIndex}: Props) => {
         }}
       >
         {cities.map((city, index) => {
-          // Calculate this card's center position
+          /*
+           * Find each card's center position
+           */
           const cardCenterX =
             translateX +
             index * STEP +
@@ -121,7 +168,10 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             cardCenterX - screenCenterX
           );
 
-          // Center card becomes larger
+          /*
+           * Cards grow as they approach
+           * the center.
+           */
           const scale = interpolate(
             distanceFromCenter,
             [0, STEP],
@@ -132,7 +182,10 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             }
           );
 
-          // Center card becomes more visible
+          /*
+           * Cards also become more opaque
+           * near the center.
+           */
           const opacity = interpolate(
             distanceFromCenter,
             [0, STEP * 1.3],
