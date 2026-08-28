@@ -21,63 +21,71 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   const frame = useCurrentFrame();
   const {fps, width} = useVideoConfig();
 
-  const repeatedCities = [
-    ...cities,
-    ...cities,
-    ...cities,
-  ];
+  const startIndex = 0;
+  const endIndex = cities.length - 1;
 
-  // Selected city in the second copy of the array
-  const targetIndex = cities.length + selectedIndex;
-
-  // X position needed to center the FIRST card
   const startX =
-    width / 2 - CARD_WIDTH / 2;
+    width / 2 -
+    CARD_WIDTH / 2 -
+    startIndex * STEP;
 
-  // X position needed to center the selected card
+  const endX =
+    width / 2 -
+    CARD_WIDTH / 2 -
+    endIndex * STEP;
+
   const targetX =
     width / 2 -
     CARD_WIDTH / 2 -
-    targetIndex * STEP;
+    selectedIndex * STEP;
 
-  const travelEnd = 90;
+  // Forward scan through all cities
+  const forwardEnd = 75;
 
-  // Move slightly too far, then spring backwards
-  const overshoot = -120;
+  // Slight overshoot beyond the last city
+  const endOvershoot = -100;
 
-  const travelX = interpolate(
+  const forwardX = interpolate(
     frame,
-    [0, travelEnd],
-    [startX, targetX + overshoot],
+    [0, forwardEnd],
+    [startX, endX + endOvershoot],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     }
   );
 
-  const springFrame = Math.max(
+  // Reverse back to selected city
+  const reverseFrame = Math.max(
     0,
-    frame - travelEnd
+    frame - forwardEnd
   );
 
-  const settle = spring({
-    frame: springFrame,
+  const reverseSpring = spring({
+    frame: reverseFrame,
     fps,
     config: {
-      damping: 12,
-      stiffness: 130,
-      mass: 0.8,
+    damping: 18,
+    stiffness: 25,
+    mass: 1.2,
     },
+    // config: {
+    //   damping: 14,
+    //   stiffness: 110,
+    //   mass: 0.8,
+    // },
   });
 
+  const reverseX = interpolate(
+    reverseSpring,
+    [0, 1],
+    [endX + endOvershoot, targetX]
+  );
+
   const translateX =
-    frame < travelEnd
-      ? travelX
-      : interpolate(
-          settle,
-          [0, 1],
-          [targetX + overshoot, targetX]
-        );
+    frame <= forwardEnd
+      ? forwardX
+      : reverseX;
 
   return (
     <AbsoluteFill
@@ -87,64 +95,68 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     >
       <div
         style={{
-            position: "absolute",
-            left: 0,
-            top: "50%",
-            display: "flex",
-            gap: GAP,
-            alignItems: "center",
-            transform: `
+          position: "absolute",
+          left: 0,
+          top: "50%",
+          display: "flex",
+          gap: GAP,
+          alignItems: "center",
+
+          transform: `
             translateX(${translateX}px)
             translateY(-50%)
-            `,
+          `,
         }}
-        >
-        {repeatedCities.map((city, index) => {
-            const cardCenterX =
+      >
+        {cities.map((city, index) => {
+          // Calculate this card's center position
+          const cardCenterX =
             translateX +
             index * STEP +
             CARD_WIDTH / 2;
 
-            const screenCenterX = width / 2;
+          const screenCenterX = width / 2;
 
-            const distanceFromCenter = Math.abs(
+          const distanceFromCenter = Math.abs(
             cardCenterX - screenCenterX
-            );
+          );
 
-            const scale = interpolate(
+          // Center card becomes larger
+          const scale = interpolate(
             distanceFromCenter,
             [0, STEP],
-            [1, 0.82],
+            [1, 0.88],
             {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
             }
-            );
+          );
 
-            const opacity = interpolate(
+          // Center card becomes more visible
+          const opacity = interpolate(
             distanceFromCenter,
             [0, STEP * 1.3],
-            [1, 0.45],
+            [1, 0.6],
             {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
             }
-            );
+          );
 
-            return (
+          return (
             <div
-                key={`${city.id}-${index}`}
-                style={{
+              key={city.id}
+              style={{
+                flexShrink: 0,
                 transform: `scale(${scale})`,
                 opacity,
-                flexShrink: 0,
-                }}
+              }}
             >
-                <CityCard city={city} />
+              <CityCard city={city} />
             </div>
-            );
+          );
         })}
-        </div>
+      </div>
     </AbsoluteFill>
   );
 };
