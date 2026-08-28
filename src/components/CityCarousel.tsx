@@ -239,24 +239,11 @@ export const CityCarousel = ({selectedIndex}: Props) => {
         src={staticFile("icons/cursor.png")}
         style={{
           position: "absolute",
-
           width: 80,
-          left: "80%",
+          left: "50%",
           top: "68%",
-          transform: "none",
-
-        //   width: 80,
-        //   // Start from horizontal center
-        //   left: "50%",
-        //   // Below the carousel
-        //   top: "76%",
-
+          transform: `translateX(${cursorX}px) rotate(-8deg) scaleX(${frame > forwardEnd ? -1 : 1})`,
           opacity: cursorOpacity,
-
-        //   transform: `
-        //     translateX(${cursorX}px)
-        //     rotate(-8deg)
-        //   `,
         }}
       />
     </AbsoluteFill>

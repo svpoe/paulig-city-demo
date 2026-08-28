@@ -63,9 +63,9 @@ export const Intro = () => {
             letterSpacing: -2,
           }}
         >
-          Choose your blend,
+          Kahvi kutsuu,
           <br />
-          choose your destination.
+          mutta minne?
         </div>
       </div>
 
