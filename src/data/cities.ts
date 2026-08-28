@@ -19,6 +19,17 @@ export const cities: City[] = [
     textColor: "#151515",
     packageSrc: "packages/tokyo.png",
   },
+
+    {
+    id: "paris",
+    city: "PARIS",
+    roast: "French Style Roast",
+    tastingNote: "Rich · Notes of caramel",
+    color: "#08649B",
+    textColor: "#FFFFFF",
+    packageSrc: "packages/paris.png",
+  },
+  
   {
     id: "barcelona",
     city: "BARCELONA",
@@ -29,15 +40,7 @@ export const cities: City[] = [
     packageSrc: "packages/barcelona.png",
   },
 
-  {
-    id: "paris",
-    city: "PARIS",
-    roast: "French Style Roast",
-    tastingNote: "Rich · Notes of caramel",
-    color: "#08649B",
-    textColor: "#FFFFFF",
-    packageSrc: "packages/paris.png",
-  },
+
   {
     id: "la",
     city: "Los Angeles",
