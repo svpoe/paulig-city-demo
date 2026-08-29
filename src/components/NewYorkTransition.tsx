@@ -8,7 +8,7 @@ import {
   useVideoConfig,
 } from "remotion";
 
-export const ReykjavikTransition = () => {
+export const NewYorkTransition = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
 
@@ -55,16 +55,35 @@ export const ReykjavikTransition = () => {
     }
   );
 
+//   const videoZoom = interpolate(
+//     frame,
+//     [42, 90],
+//     [1.04, 1.10],
+//     {
+//         extrapolateLeft: "clamp",
+//         extrapolateRight: "clamp",
+//     }
+//     );
+
+const videoZoom = interpolate(
+  frame,
+  [42, 90],
+  [1.05, 1.25],
+  {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  }
+);
   const cardWidth = interpolate(
     progress,
     [0, 1],
-    [620, width * 0.80]
+    [620, width * 0.8]
   );
 
   const cardHeight = interpolate(
     progress,
     [0, 1],
-    [840, height * 0.70]
+    [840, height * 0.7]
   );
 
   const borderRadius = interpolate(
@@ -93,16 +112,6 @@ export const ReykjavikTransition = () => {
     }
   );
 
-   const videoZoom = interpolate(
-    frame,
-     [42, 90],
-  [1.15, 1.34],
-    {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-    }
-);
-
   const cursorOpacity = interpolate(
     frame,
     [26, 35],
@@ -118,10 +127,10 @@ export const ReykjavikTransition = () => {
     [45, 52],
     [0, 1],
     {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
     }
-    );
+  );
 
   return (
     <AbsoluteFill
@@ -130,7 +139,7 @@ export const ReykjavikTransition = () => {
         justifyContent: "center",
       }}
     >
-      {/* Expanding Reykjavík card */}
+      {/* Expanding New York card */}
       <div
         style={{
           position: "absolute",
@@ -152,31 +161,29 @@ export const ReykjavikTransition = () => {
 
           overflow: "hidden",
 
-          backgroundColor: "#69C6E5",
+          backgroundColor: "#FFD51E",
         }}
       >
-        {/* Lagoon video */}
+        {/* NYC video */}
         <OffthreadVideo
-          src={staticFile("videos/reykjavik.mp4")}
+          src={staticFile("videos/new-york.mp4")}
           muted
-          playbackRate={0.6}
+          playbackRate={0.8}
           style={{
             position: "absolute",
             width: "100%",
             height: "100%",
             objectFit: "cover",
             opacity: videoOpacity,
-            filter: "brightness(0.82)",
-            // transform: "scale(1.25)",
             transform: `scale(${videoZoom})`,
             transformOrigin: "75% 75%",
-            // clipPath: "inset(0 0 10% 0)",
+            filter: "brightness(0.72)",
           }}
         />
 
         {/* BACK BUTTON */}
         <div
-        style={{
+          style={{
             position: "absolute",
             top: 32,
             left: 32,
@@ -189,23 +196,23 @@ export const ReykjavikTransition = () => {
             justifyContent: "center",
             opacity: backButtonOpacity,
             zIndex: 10,
-        }}
+          }}
         >
-        <div
+          <div
             style={{
-            width: 28,
-            height: 28,
-            borderLeft: "7px solid white",
-            borderBottom: "7px solid white",
-            transform: "rotate(45deg)",
-            marginLeft: 8,
+              width: 28,
+              height: 28,
+              borderLeft: "7px solid white",
+              borderBottom: "7px solid white",
+              transform: "rotate(45deg)",
+              marginLeft: 8,
             }}
-        />
+          />
         </div>
 
-        {/* Reykjavík package - fades away */}
+        {/* New York package */}
         <Img
-          src={staticFile("packages/reykjavik.png")}
+          src={staticFile("packages/new_york.png")}
           style={{
             position: "absolute",
             height: "68%",
@@ -233,7 +240,7 @@ export const ReykjavikTransition = () => {
               fontWeight: 800,
             }}
           >
-            REYKJAVÍK
+            NEW YORK
           </div>
         </div>
       </div>
@@ -259,7 +266,6 @@ export const ReykjavikTransition = () => {
           `,
         }}
       />
-
     </AbsoluteFill>
   );
 };

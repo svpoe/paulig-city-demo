@@ -8,7 +8,7 @@ import {
   useVideoConfig,
 } from "remotion";
 
-export const ReykjavikTransition = () => {
+export const ParisTransition = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
 
@@ -44,7 +44,7 @@ export const ReykjavikTransition = () => {
     }
   );
 
-  // Expansion starts after click
+  // Card expansion
   const progress = interpolate(
     frame,
     [24, 48],
@@ -58,13 +58,13 @@ export const ReykjavikTransition = () => {
   const cardWidth = interpolate(
     progress,
     [0, 1],
-    [620, width * 0.80]
+    [620, width * 0.8]
   );
 
   const cardHeight = interpolate(
     progress,
     [0, 1],
-    [840, height * 0.70]
+    [840, height * 0.7]
   );
 
   const borderRadius = interpolate(
@@ -73,6 +73,7 @@ export const ReykjavikTransition = () => {
     [40, 28]
   );
 
+  // Fade in Paris video
   const videoOpacity = interpolate(
     frame,
     [27, 42],
@@ -83,6 +84,7 @@ export const ReykjavikTransition = () => {
     }
   );
 
+  // Fade out package
   const packageOpacity = interpolate(
     frame,
     [24, 34],
@@ -93,16 +95,7 @@ export const ReykjavikTransition = () => {
     }
   );
 
-   const videoZoom = interpolate(
-    frame,
-     [42, 90],
-  [1.15, 1.34],
-    {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-    }
-);
-
+  // Cursor disappears after click
   const cursorOpacity = interpolate(
     frame,
     [26, 35],
@@ -113,15 +106,27 @@ export const ReykjavikTransition = () => {
     }
   );
 
+  // Back button fades in
   const backButtonOpacity = interpolate(
     frame,
     [45, 52],
     [0, 1],
     {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
     }
-    );
+  );
+
+  // Gentle zoom toward coffee area
+  const videoZoom = interpolate(
+    frame,
+    [42, 90],
+    [1.04, 1.14],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
 
   return (
     <AbsoluteFill
@@ -130,7 +135,7 @@ export const ReykjavikTransition = () => {
         justifyContent: "center",
       }}
     >
-      {/* Expanding Reykjavík card */}
+      {/* Expanding Parisien card */}
       <div
         style={{
           position: "absolute",
@@ -149,34 +154,30 @@ export const ReykjavikTransition = () => {
           transform: "translateX(-50%)",
 
           borderRadius,
-
           overflow: "hidden",
 
-          backgroundColor: "#69C6E5",
+          backgroundColor: "#08649B",
         }}
       >
-        {/* Lagoon video */}
+        {/* Paris video */}
         <OffthreadVideo
-          src={staticFile("videos/reykjavik.mp4")}
+          src={staticFile("videos/paris.mp4")}
           muted
-          playbackRate={0.6}
+          playbackRate={0.8}
           style={{
             position: "absolute",
             width: "100%",
             height: "100%",
             objectFit: "cover",
             opacity: videoOpacity,
-            filter: "brightness(0.82)",
-            // transform: "scale(1.25)",
             transform: `scale(${videoZoom})`,
-            transformOrigin: "75% 75%",
-            // clipPath: "inset(0 0 10% 0)",
+            transformOrigin: "70% 70%",
           }}
         />
 
-        {/* BACK BUTTON */}
+        {/* Back button */}
         <div
-        style={{
+          style={{
             position: "absolute",
             top: 32,
             left: 32,
@@ -189,23 +190,23 @@ export const ReykjavikTransition = () => {
             justifyContent: "center",
             opacity: backButtonOpacity,
             zIndex: 10,
-        }}
+          }}
         >
-        <div
+          <div
             style={{
-            width: 28,
-            height: 28,
-            borderLeft: "7px solid white",
-            borderBottom: "7px solid white",
-            transform: "rotate(45deg)",
-            marginLeft: 8,
+              width: 28,
+              height: 28,
+              borderLeft: "7px solid white",
+              borderBottom: "7px solid white",
+              transform: "rotate(45deg)",
+              marginLeft: 8,
             }}
-        />
+          />
         </div>
 
-        {/* Reykjavík package - fades away */}
+        {/* Parisien package */}
         <Img
-          src={staticFile("packages/reykjavik.png")}
+          src={staticFile("packages/parisien.png")}
           style={{
             position: "absolute",
             height: "68%",
@@ -217,13 +218,14 @@ export const ReykjavikTransition = () => {
           }}
         />
 
+        {/* Parisien title */}
         <div
           style={{
             position: "absolute",
             bottom: 50,
             width: "100%",
             textAlign: "center",
-            color: "#151515",
+            color: "white",
             opacity: packageOpacity,
           }}
         >
@@ -233,7 +235,7 @@ export const ReykjavikTransition = () => {
               fontWeight: 800,
             }}
           >
-            REYKJAVÍK
+            PARISIEN
           </div>
         </div>
       </div>
@@ -259,7 +261,6 @@ export const ReykjavikTransition = () => {
           `,
         }}
       />
-
     </AbsoluteFill>
   );
 };
