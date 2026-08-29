@@ -18,14 +18,14 @@ const STEP = CARD_WIDTH + GAP;
 
 type Props = {
   selectedIndex: number;
+  fromIndex?: number;
 };
 
-export const CityCarousel = ({selectedIndex}: Props) => {
+export const CityCarousel = ({selectedIndex, fromIndex = 0}: Props) => {
   const frame = useCurrentFrame();
   const {fps, width} = useVideoConfig();
 
-  const startIndex = 0;
-  const endIndex = cities.length - 1;
+  const startIndex = fromIndex;
 
   // -------------------------
   // CARD POSITIONS
@@ -36,34 +36,31 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     CARD_WIDTH / 2 -
     startIndex * STEP;
 
-  const endX =
-    width / 2 -
-    CARD_WIDTH / 2 -
-    endIndex * STEP;
-
   const targetX =
     width / 2 -
     CARD_WIDTH / 2 -
     selectedIndex * STEP;
 
+  // Direction of travel so the overshoot/settle motion matches
+  // whether the carousel is scrolling forward or backward
+  const direction = Math.sign(selectedIndex - startIndex) || 1;
+
   // -------------------------
   // TIMING
   // -------------------------
 
-  const forwardEnd = 75;
-  const reverseEnd = 125;
+  const scrollEnd = 45;
 
-  const endOvershoot = -100;
-  const targetOvershoot = -80;
+  const targetOvershoot = -80 * direction;
 
   // -------------------------
-  // PHASE 1: SCROLL FORWARD
+  // PHASE 1: SCROLL TO TARGET
   // -------------------------
 
-  const forwardX = interpolate(
+  const scrollX = interpolate(
     frame,
-    [0, forwardEnd],
-    [startX, endX + endOvershoot],
+    [0, scrollEnd],
+    [startX, targetX + targetOvershoot],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -71,26 +68,12 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   );
 
   // -------------------------
-  // PHASE 2: RETURN LEFT
-  // -------------------------
-
-  const reverseX = interpolate(
-    frame,
-    [forwardEnd, reverseEnd],
-    [endX + endOvershoot, targetX + targetOvershoot],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  // -------------------------
-  // PHASE 3: SPRING SETTLE
+  // PHASE 2: SPRING SETTLE
   // -------------------------
 
   const settleFrame = Math.max(
     0,
-    frame - reverseEnd
+    frame - scrollEnd
   );
 
   const settle = spring({
@@ -110,11 +93,9 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   );
 
   const translateX =
-    frame <= forwardEnd
-      ? forwardX
-      : frame <= reverseEnd
-        ? reverseX
-        : settleX;
+    frame <= scrollEnd
+      ? scrollX
+      : settleX;
 
   // -------------------------
   // CURSOR MOVEMENT
@@ -122,8 +103,8 @@ export const CityCarousel = ({selectedIndex}: Props) => {
 
   const cursorX = interpolate(
     frame,
-    [0, forwardEnd, reverseEnd],
-    [180, 320, -320],
+    [0, scrollEnd],
+    [180, -320],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -132,13 +113,14 @@ export const CityCarousel = ({selectedIndex}: Props) => {
 
   const cursorOpacity = interpolate(
     frame,
-    [reverseEnd, reverseEnd + 20],
+    [scrollEnd, scrollEnd + 20],
     [1, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     }
   );
+
 
   // -------------------------
   // RENDER
@@ -227,8 +209,8 @@ export const CityCarousel = ({selectedIndex}: Props) => {
       <div
         style={{
           position: "absolute",
-          left: "50%",
-          top: "68%",
+          left: "55%",
+          top: "65%",
           transform: `
             translateX(${cursorX}px)
             rotate(-8deg)

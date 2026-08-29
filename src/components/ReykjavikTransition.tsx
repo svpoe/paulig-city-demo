@@ -235,6 +235,15 @@ export const ReykjavikTransition = () => {
           >
             REYKJAVÍK
           </div>
+
+          <div
+            style={{
+              fontSize: 24,
+              marginTop: 8,
+            }}
+          >
+            Icelandic Style Roast
+          </div>
         </div>
       </div>
 

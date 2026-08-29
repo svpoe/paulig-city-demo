@@ -172,6 +172,7 @@ export const ParisTransition = () => {
             opacity: videoOpacity,
             transform: `scale(${videoZoom})`,
             transformOrigin: "70% 70%",
+            filter: "brightness(0.82)",
           }}
         />
 
@@ -236,6 +237,15 @@ export const ParisTransition = () => {
             }}
           >
             PARISIEN
+          </div>
+
+          <div
+            style={{
+              fontSize: 24,
+              marginTop: 8,
+            }}
+          >
+            French Style Roast
           </div>
         </div>
       </div>

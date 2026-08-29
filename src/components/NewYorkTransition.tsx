@@ -242,6 +242,15 @@ const videoZoom = interpolate(
           >
             NEW YORK
           </div>
+
+          <div
+            style={{
+              fontSize: 24,
+              marginTop: 8,
+            }}
+          >
+            New York Style Roast
+          </div>
         </div>
       </div>
 

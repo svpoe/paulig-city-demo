@@ -19,6 +19,58 @@ export const cities: City[] = [
     packageSrc: "packages/tokyo.png",
   },
 
+    {
+    id: "singapore",
+    city: "SINGAPORE",
+    roast: "Singaporean Style Roast",
+    tastingNote: "Smooth · Notes of spice",
+    color: "#82CFA5",
+    textColor: "#FFFFFF",
+    packageSrc: "packages/singapore.png",
+  },
+
+  {
+    id: "napoli",
+    city: "NAPOLI",
+    roast: "Neapolitan Style Roast",
+    tastingNote: "Bold · Notes of dark cocoa",
+    color: "#F21D3F",
+    textColor: "#FFFFFF",
+    packageSrc: "packages/napoli.png",
+  },
+  
+    {
+    id: "reykjavik",
+    city: "REYKJAVIK",
+    roast: "Icelandic Style Roast",
+    tastingNote: "Clean · Notes of vanilla",
+    color: "#69C6E5",
+    textColor: "#151515",
+    packageSrc: "packages/reykjavik.png",
+  },
+
+
+    {
+    id: "barcelona",
+    city: "BARCELONA",
+    roast: "Catalan Style Roast",
+    tastingNote: "Full-bodied · Notes of nuts",
+    color: "#F26A21",
+    textColor: "#151515",
+    packageSrc: "packages/barcelona.png",
+  },
+    {
+    id: "new-york",
+    city: "NEW YORK",
+    roast: "New York Style Roast",
+    tastingNote: "Balanced · Notes of chocolate",
+    color: "#FFD51E",
+    textColor: "#FFFFFF",
+    packageSrc: "packages/new_york.png",
+  },
+  
+
+
   {
     id: "paris",
     city: "PARIS",
@@ -28,15 +80,8 @@ export const cities: City[] = [
     textColor: "#FFFFFF",
     packageSrc: "packages/paris.png",
   },
-  {
-    id: "barcelona",
-    city: "BARCELONA",
-    roast: "Catalan Style Roast",
-    tastingNote: "Full-bodied · Notes of nuts",
-    color: "#F26A21",
-    textColor: "#151515",
-    packageSrc: "packages/barcelona.png",
-  },
+
+
   {
     id: "la",
     city: "Los Angeles",
@@ -47,43 +92,6 @@ export const cities: City[] = [
     packageSrc: "packages/la.png",
   },
   {
-    id: "napoli",
-    city: "NAPOLI",
-    roast: "Neapolitan Style Roast",
-    tastingNote: "Bold · Notes of dark cocoa",
-    color: "#F21D3F",
-    textColor: "#FFFFFF",
-    packageSrc: "packages/napoli.png",
-  },
-  {
-    id: "reykjavik",
-    city: "REYKJAVIK",
-    roast: "Icelandic Style Roast",
-    tastingNote: "Clean · Notes of vanilla",
-    color: "#69C6E5",
-    textColor: "#151515",
-    packageSrc: "packages/reykjavik.png",
-  },
-  {
-    id: "new-york",
-    city: "NEW YORK",
-    roast: "New York Style Roast",
-    tastingNote: "Balanced · Notes of chocolate",
-    color: "#FFD51E",
-    textColor: "#FFFFFF",
-    packageSrc: "packages/new_york.png",
-  },
-  
-  {
-    id: "singapore",
-    city: "SINGAPORE",
-    roast: "Singaporean Style Roast",
-    tastingNote: "Smooth · Notes of spice",
-    color: "#82CFA5",
-    textColor: "#FFFFFF",
-    packageSrc: "packages/singapore.png",
-  },
-  {
     id: "sydney",
     city: "SYDNEY",
     roast: "Australian Style Roast",
@@ -92,5 +100,7 @@ export const cities: City[] = [
     textColor: "#151515",
     packageSrc: "packages/sydney.png",
   },
+
+
 ];
 

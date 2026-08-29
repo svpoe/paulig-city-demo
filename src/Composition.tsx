@@ -15,35 +15,35 @@ export const MyComposition = () => {
         <Intro />
       </Sequence>
 
-      {/* FIRST CAROUSEL: frames 35–135 */}
-      <Sequence from={35} durationInFrames={100}>
-        <CityCarousel selectedIndex={5} />
+      {/* FIRST CAROUSEL: frames 35–95 */}
+      <Sequence from={35} durationInFrames={60}>
+        <CityCarousel selectedIndex={6} />
       </Sequence>
 
-      {/* REYKJAVÍK: frames 135–195 */}
-      <Sequence from={135} durationInFrames={60}>
+      {/* PARIS: frames 95–155 */}
+      <Sequence from={95} durationInFrames={60}>
+        <ParisTransition />
+      </Sequence>
+
+      {/* SECOND CAROUSEL: frames 155–195 */}
+      <Sequence from={155} durationInFrames={40}>
+        <CityCarousel selectedIndex={3} fromIndex={6} />
+      </Sequence>
+
+      {/* REYKJAVÍK: frames 195–255 */}
+      <Sequence from={195} durationInFrames={60}>
         <ReykjavikTransition />
       </Sequence>
 
-      {/* SECOND CAROUSEL: frames 195–235 */}
-      <Sequence from={195} durationInFrames={40}>
-        <CityCarousel selectedIndex={6} />
+      {/* THIRD CAROUSEL: frames 255–285 */}
+      <Sequence from={255} durationInFrames={30}>
+        <CityCarousel selectedIndex={7} fromIndex={3} />
       </Sequence>
 
-      {/* NEW YORK: frames 235–295 */}
-      <Sequence from={235} durationInFrames={60}>
+
+      {/* NEW YORK: frames 285–355 */}
+      <Sequence from={285} durationInFrames={70}>
         <NewYorkTransition />
-      </Sequence>
-
-      {/* THIRD CAROUSEL: frames 295–335 */}
-      <Sequence from={295} durationInFrames={40}>
-        <CityCarousel selectedIndex={6} />
-      </Sequence>
-
-
-      {/* PARIS: frames 335–425 */}
-      <Sequence from={335} durationInFrames={90}>
-        <ParisTransition />
       </Sequence>
 
       {/* Persistent website header */}
