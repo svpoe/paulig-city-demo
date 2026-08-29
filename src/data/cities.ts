@@ -56,7 +56,7 @@ export const cities: City[] = [
     roast: "Catalan Style Roast",
     tastingNote: "Full-bodied · Notes of nuts",
     color: "#F26A21",
-    textColor: "#151515",
+    textColor: "#FFFFFF",
     packageSrc: "packages/barcelona.png",
   },
     {
@@ -65,7 +65,7 @@ export const cities: City[] = [
     roast: "New York Style Roast",
     tastingNote: "Balanced · Notes of chocolate",
     color: "#FFD51E",
-    textColor: "#FFFFFF",
+    textColor: "#151515",
     packageSrc: "packages/new_york.png",
   },
   

@@ -10,7 +10,7 @@ import {
 
 export const ParisTransition = () => {
   const frame = useCurrentFrame();
-  const {width, height} = useVideoConfig();
+  const {width, height, fps} = useVideoConfig();
 
   // Cursor moves onto card
   const cursorX = interpolate(
@@ -121,7 +121,7 @@ export const ParisTransition = () => {
   const videoZoom = interpolate(
     frame,
     [42, 90],
-    [1.04, 1.14],
+    [1.26, 1.38],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -164,6 +164,7 @@ export const ParisTransition = () => {
           src={staticFile("videos/paris.mp4")}
           muted
           playbackRate={0.8}
+          trimBefore={fps * 4}
           style={{
             position: "absolute",
             width: "100%",
@@ -236,7 +237,7 @@ export const ParisTransition = () => {
               fontWeight: 800,
             }}
           >
-            PARISIEN
+            PARIS
           </div>
 
           <div

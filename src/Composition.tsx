@@ -36,13 +36,13 @@ export const MyComposition = () => {
       </Sequence>
 
       {/* THIRD CAROUSEL: frames 255–285 */}
-      <Sequence from={255} durationInFrames={30}>
+      <Sequence from={255} durationInFrames={25}>
         <CityCarousel selectedIndex={7} fromIndex={3} />
       </Sequence>
 
 
       {/* NEW YORK: frames 285–355 */}
-      <Sequence from={285} durationInFrames={70}>
+      <Sequence from={280} durationInFrames={140}>
         <NewYorkTransition />
       </Sequence>
 
