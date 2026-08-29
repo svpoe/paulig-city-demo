@@ -224,7 +224,28 @@ export const CityCarousel = ({selectedIndex}: Props) => {
       </div>
 
       {/* CURSOR */}
-      <Img
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "68%",
+          transform: `
+            translateX(${cursorX}px)
+            rotate(-8deg)
+          `,
+          zIndex: 3,
+        }}
+      >
+        <Img
+          src={staticFile("icons/cursor.png")}
+          style={{
+            width: 80,
+            opacity: cursorOpacity,
+          }}
+        />
+      </div>
+
+      {/* <Img
         src={staticFile("icons/cursor.png")}
         style={{
           position: "absolute",
@@ -239,7 +260,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             scaleX(${frame > forwardEnd ? -1 : 1})
           `,
         }}
-      />
+      /> */}
     </AbsoluteFill>
   );
 };

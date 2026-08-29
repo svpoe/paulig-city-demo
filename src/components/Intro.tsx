@@ -76,17 +76,7 @@ export const Intro = () => {
         </div>
       </div>
 
-      {/* Cursor */}
-      <Img
-        src={staticFile("icons/cursor.png")}
-        style={{
-          position: "absolute",
-          width: 90,
-          left: "78%",
-          top: "45%",
-          transform: `translateX(${cursorX}px) rotate(-8deg)`,
-        }}
-      />
+
     </AbsoluteFill>
   );
 };

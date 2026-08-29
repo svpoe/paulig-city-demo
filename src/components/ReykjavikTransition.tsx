@@ -16,7 +16,7 @@ export const ReykjavikTransition = () => {
   const cursorX = interpolate(
     frame,
     [0, 18],
-    [180, 0],
+    [-280, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -26,7 +26,7 @@ export const ReykjavikTransition = () => {
   const cursorY = interpolate(
     frame,
     [0, 18],
-    [250, 0],
+    [220, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -146,6 +146,9 @@ export const ReykjavikTransition = () => {
             height: "100%",
             objectFit: "cover",
             opacity: videoOpacity,
+            filter: "brightness(0.82)",
+            transform: "scale(1.25)",
+            // clipPath: "inset(0 0 10% 0)",
           }}
         />
 
