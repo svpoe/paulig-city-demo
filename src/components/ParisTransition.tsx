@@ -206,7 +206,7 @@ export const ParisTransition = () => {
 
         {/* Parisien package */}
         <Img
-          src={staticFile("packages/parisien.png")}
+          src={staticFile("packages/paris.png")}
           style={{
             position: "absolute",
             height: "68%",
