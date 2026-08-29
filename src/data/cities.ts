@@ -56,15 +56,6 @@ export const cities: City[] = [
     packageSrc: "packages/napoli.png",
   },
   {
-    id: "new-york",
-    city: "NEW YORK",
-    roast: "New York Style Roast",
-    tastingNote: "Balanced · Notes of chocolate",
-    color: "#FFD51E",
-    textColor: "#FFFFFF",
-    packageSrc: "packages/new_york.png",
-  },
-  {
     id: "reykjavik",
     city: "REYKJAVIK",
     roast: "Icelandic Style Roast",
@@ -73,6 +64,16 @@ export const cities: City[] = [
     textColor: "#151515",
     packageSrc: "packages/reykjavik.png",
   },
+  {
+    id: "new-york",
+    city: "NEW YORK",
+    roast: "New York Style Roast",
+    tastingNote: "Balanced · Notes of chocolate",
+    color: "#FFD51E",
+    textColor: "#FFFFFF",
+    packageSrc: "packages/new_york.png",
+  },
+  
   {
     id: "singapore",
     city: "SINGAPORE",
