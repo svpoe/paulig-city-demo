@@ -10,7 +10,7 @@ import {
 
 import {cities} from "../data/cities";
 import {CityCard} from "./CityCard";
-import {SearchBar} from "./SearchBar";
+import {CoffeeCup} from "./CoffeeCup";
 
 const CARD_WIDTH = 620;
 const GAP = 50;
@@ -50,10 +50,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   // TIMING
   // -------------------------
 
-  // Forward scroll ends here
   const forwardEnd = 75;
-
-  // Return toward Barcelona ends here
   const reverseEnd = 125;
 
   const endOvershoot = -100;
@@ -112,7 +109,6 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     [targetX + targetOvershoot, targetX]
   );
 
-  // Choose the current carousel position
   const translateX =
     frame <= forwardEnd
       ? forwardX
@@ -124,8 +120,6 @@ export const CityCarousel = ({selectedIndex}: Props) => {
   // CURSOR MOVEMENT
   // -------------------------
 
-  // Cursor moves right during forward scroll,
-  // then moves left during the return.
   const cursorX = interpolate(
     frame,
     [0, forwardEnd, reverseEnd],
@@ -136,7 +130,6 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     }
   );
 
-  // Fade cursor after Barcelona is selected.
   const cursorOpacity = interpolate(
     frame,
     [reverseEnd, reverseEnd + 20],
@@ -155,10 +148,17 @@ export const CityCarousel = ({selectedIndex}: Props) => {
     <AbsoluteFill
       style={{
         overflow: "hidden",
+        backgroundColor: "#f4efe7",
       }}
     >
-      {/* Fixed website search bar */}
-      <SearchBar />
+      {/* FADED COFFEE CUP BACKGROUND */}
+      <div
+        style={{
+          opacity: 0.18,
+        }}
+      >
+        <CoffeeCup />
+      </div>
 
       {/* CAROUSEL */}
       <div
@@ -173,10 +173,10 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             translateX(${translateX}px)
             translateY(-50%)
           `,
+          zIndex: 2,
         }}
       >
         {cities.map((city, index) => {
-          // Find card position relative to screen center
           const cardCenterX =
             translateX +
             index * STEP +
@@ -188,7 +188,6 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             cardCenterX - screenCenterX
           );
 
-          // Center card gets larger
           const scale = interpolate(
             distanceFromCenter,
             [0, STEP],
@@ -199,7 +198,6 @@ export const CityCarousel = ({selectedIndex}: Props) => {
             }
           );
 
-          // Center card gets more visible
           const opacity = interpolate(
             distanceFromCenter,
             [0, STEP * 1.3],
@@ -234,6 +232,7 @@ export const CityCarousel = ({selectedIndex}: Props) => {
           left: "50%",
           top: "68%",
           opacity: cursorOpacity,
+          zIndex: 3,
           transform: `
             translateX(${cursorX}px)
             rotate(-8deg)

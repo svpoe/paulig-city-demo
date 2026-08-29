@@ -70,7 +70,7 @@ export const ReykjavikTransition = () => {
   const borderRadius = interpolate(
     progress,
     [0, 1],
-    [40, 0]
+    [40, 28]
   );
 
   const videoOpacity = interpolate(
