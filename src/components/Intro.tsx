@@ -7,6 +7,7 @@ import {
 } from "remotion";
 
 import {SearchBar} from "./SearchBar";
+import {CoffeeCup} from "./CoffeeCup";
 
 export const Intro = () => {
   const frame = useCurrentFrame();
@@ -51,6 +52,7 @@ export const Intro = () => {
       }}
     >
       <SearchBar />
+      <CoffeeCup />
 
       {/* Headline */}
       <div
@@ -80,8 +82,8 @@ export const Intro = () => {
         style={{
           position: "absolute",
           width: 90,
-          left: "61%",
-          top: "62%",
+          left: "78%",
+          top: "45%",
           transform: `translateX(${cursorX}px) rotate(-8deg)`,
         }}
       />
