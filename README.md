@@ -25,14 +25,12 @@ The destinations are Paris, Reykjavik, and New York. Preserve vertical framing a
 
 | Stage | Tool / Technology | Purpose |
 |---|---|---|
-| Concept development | ChatGPT | Creative direction, storyboard development, prompt iteration |
 | Image generation & editing | ChatGPT / OpenAI image generation | Creation and modification of photorealistic destination keyframes |
 | Image-to-video | Google Flow / Veo 3.1 | Animation of generated keyframes into realistic destination footage |
 | Motion graphics | Remotion | Programmatic animation, carousel movement, transitions, cursor interactions |
 | UI composition | React + TypeScript | Construction of reusable UI and visual components |
 | Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
 | Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
-| Version control | Git | Tracking source-code development and iterations |
 
 ---
 
