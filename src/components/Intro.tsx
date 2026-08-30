@@ -30,6 +30,16 @@ export const Intro = () => {
     }
   );
 
+  const questionOpacity = interpolate(frame, [20, 26], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const questionTranslateY = interpolate(frame, [20, 26], [12, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
   return (
     <AbsoluteFill
       style={{
@@ -60,8 +70,14 @@ export const Intro = () => {
           }}
         >
           Kahvi kutsuu,
-          <br />
-          mutta minne?
+          <div
+            style={{
+              opacity: questionOpacity,
+              transform: `translateY(${questionTranslateY}px)`,
+            }}
+          >
+            mutta minne?
+          </div>
         </div>
       </div>
 
