@@ -4,6 +4,10 @@ A vertical, interactive-style coffee advert built with Remotion. A fictional K-R
 
 Portfolio concept only. This is not an official Paulig or K-Ruoka campaign.
 
+Product/UI assets are composed deterministically in Remotion. Destination keyframes were generated with OpenAI image generation with real images of the locations as reference, then animated with Google Flow / Veo 3.1 image-to-video. This keeps packaging, logos, typography, and UI consistent while AI video supplies environmental motion.
+
+The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
+
 ## Run and Render
 
 ```bash
@@ -15,11 +19,11 @@ npm run build
 
 `npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
-## Asset and AI Workflow
+## Determenistic + Generative 
 
-Product/UI assets are composed deterministically in Remotion. Destination keyframes were generated with OpenAI image generation with real images of the locations as reference, then animated with Google Flow / Veo 3.1 image-to-video. This keeps packaging, logos, typography, and UI consistent while AI video supplies environmental motion.
+The production pipeline separates generative and deterministic elements based on their strengths. Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
 
-The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
+Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
 
 ## Technical Stack
 
@@ -32,11 +36,6 @@ The destinations are Paris, Reykjavik, and New York. Preserve vertical framing a
 | Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
 | Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
 
-## Why This Workflow?
-
-The production pipeline separates generative and deterministic elements based on their strengths. Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
-
-Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
 
 ---
 
