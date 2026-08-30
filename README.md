@@ -32,6 +32,8 @@ The destinations are Paris, Reykjavik, and New York. Preserve vertical framing a
 | Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
 | Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
 
+
+
 ---
 
 ## Project Layout
