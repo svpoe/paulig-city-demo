@@ -68,7 +68,7 @@ export const NewYorkTransition = () => {
 const videoZoom = interpolate(
   frame,
   [42, 90],
-  [1.05, 1.25],
+  [1.35, 1.55],
   {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -125,6 +125,17 @@ const videoZoom = interpolate(
   const backButtonOpacity = interpolate(
     frame,
     [45, 52],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  // Closing headline fades in once the New York view has settled
+  const closingTextOpacity = interpolate(
+    frame,
+    [55, 65],
     [0, 1],
     {
       extrapolateLeft: "clamp",
@@ -251,6 +262,28 @@ const videoZoom = interpolate(
           >
             New York Style Roast
           </div>
+        </div>
+      </div>
+
+      {/* Closing headline, matching the Intro's font */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: height * 0.52,
+          width: "100%",
+          textAlign: "center",
+          color: "#e9e6e6",
+          opacity: closingTextOpacity,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 70,
+            fontWeight: 700,
+            letterSpacing: -2,
+          }}
+        >
+          Sinä päätät.
         </div>
       </div>
 

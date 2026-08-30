@@ -164,7 +164,7 @@ export const ParisTransition = () => {
           src={staticFile("videos/paris.mp4")}
           muted
           playbackRate={0.8}
-          trimBefore={fps * 4}
+          trimBefore={fps * 4 - 8}
           style={{
             position: "absolute",
             width: "100%",

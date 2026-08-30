@@ -4,6 +4,7 @@ import {CityCarousel} from "./components/CityCarousel";
 import {ReykjavikTransition} from "./components/ReykjavikTransition";
 import {NewYorkTransition} from "./components/NewYorkTransition";
 import {ParisTransition} from "./components/ParisTransition";
+import {Outro} from "./components/Outro";
 import {SearchBar} from "./components/SearchBar";
 
 export const MyComposition = () => {
@@ -44,6 +45,11 @@ export const MyComposition = () => {
       {/* NEW YORK: frames 285–355 */}
       <Sequence from={280} durationInFrames={140}>
         <NewYorkTransition />
+      </Sequence>
+
+      {/* OUTRO: frames 420–465 */}
+      <Sequence from={420} durationInFrames={45}>
+        <Outro />
       </Sequence>
 
       {/* Persistent website header */}
