@@ -19,7 +19,7 @@ npm run build
 
 `npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
-## Determenistic + Generative 
+## Reaason for Determenistic + Generative Workflow
 
 The production pipeline separates generative and deterministic elements based on their strengths. Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
 
