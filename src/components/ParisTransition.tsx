@@ -9,6 +9,7 @@ import {
 } from "remotion";
 
 import {getBackButtonOffset} from "../data/motion";
+import {CoffeeCup} from "./CoffeeCup";
 
 type Props = {
   durationInFrames: number;
@@ -170,6 +171,15 @@ export const ParisTransition = ({durationInFrames}: Props) => {
         justifyContent: "center",
       }}
     >
+      {/* FADED COFFEE CUP BACKGROUND */}
+      <div
+        style={{
+          opacity: 0.18,
+        }}
+      >
+        <CoffeeCup />
+      </div>
+
       {/* Expanding Parisien card */}
       <div
         style={{
@@ -291,7 +301,7 @@ export const ParisTransition = ({durationInFrames}: Props) => {
         src={staticFile("icons/cursor.png")}
         style={{
           position: "absolute",
-          width: 80,
+          width: 44,
 
           left: "50%",
           top: "50%",

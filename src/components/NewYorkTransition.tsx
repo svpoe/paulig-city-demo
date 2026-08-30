@@ -8,6 +8,8 @@ import {
   useVideoConfig,
 } from "remotion";
 
+import {CoffeeCup} from "./CoffeeCup";
+
 export const NewYorkTransition = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
@@ -108,6 +110,15 @@ const videoZoom = interpolate(
         justifyContent: "center",
       }}
     >
+      {/* FADED COFFEE CUP BACKGROUND */}
+      <div
+        style={{
+          opacity: 0.18,
+        }}
+      >
+        <CoffeeCup />
+      </div>
+
       {/* Expanding New York card */}
       <div
         style={{

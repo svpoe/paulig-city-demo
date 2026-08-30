@@ -236,7 +236,7 @@ export const CityCarousel = ({
         src={staticFile("icons/cursor.png")}
         style={{
           position: "absolute",
-          width: 80,
+          width: 44,
           left: "50%",
           top: "50%",
           opacity: cursorOpacity,

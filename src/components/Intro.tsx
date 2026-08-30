@@ -46,6 +46,7 @@ export const Intro = () => {
       <div
         style={{
           textAlign: "center",
+          // transform: `translateY(${translateY}px)`,
           transform: `translateY(${translateY}px)`,
           color: "#171717",
         }}
