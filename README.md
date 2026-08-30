@@ -32,7 +32,11 @@ The destinations are Paris, Reykjavik, and New York. Preserve vertical framing a
 | Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
 | Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
 
+## Why This Workflow?
 
+The production pipeline separates generative and deterministic elements based on their strengths. Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
+
+Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
 
 ---
 
