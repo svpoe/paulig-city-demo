@@ -1,338 +1,70 @@
-# Paulig City Series — AI-Assisted Advertising Concept
+# Paulig City Series
 
-A short-form advertising concept exploring Paulig's City Coffee Series through an interactive travel-inspired visual experience.
+A vertical, interactive-style coffee advert built with Remotion. A fictional K-Ruoka browsing flow lets viewers select Paulig City coffees, then expands each package into an AI-generated destination scene.
 
-The reel presents the coffee collection as a fictional online shopping interface. The viewer browses through different Paulig City coffees, selects a destination, and the product card transitions into an AI-generated cinematic scene inspired by that city.
+Portfolio concept only. This is not an official Paulig or K-Ruoka campaign.
 
-The project was created as an interview portfolio piece to demonstrate an AI-assisted content production workflow combining generative image creation, image-to-video generation, motion graphics, compositing, and programmatic video editing.
+## Run and Render
 
-> Spec / portfolio concept. Not an official campaign commissioned by Paulig or K-Ruoka.
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
 
----
+`npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
-## 1. Technical Stack
+## Composition
 
-| Stage | Tool / Technology | Purpose |
-|---|---|---|
-| Image generation & editing | ChatGPT / OpenAI image generation | Creation and modification of photorealistic destination keyframes based on real images |
-| Image-to-video | Google Flow / Veo 3.1 | Animation of generated keyframes into realistic destination footage |
-| Motion graphics | Remotion | Programmatic animation, carousel movement, transitions, cursor interactions |
-| UI composition | React + TypeScript | Construction of reusable UI and visual components |
-| Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
-| Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
+| Property | Value |
+| --- | --- |
+| Format | 1080 x 1920 (9:16) |
+| Frame rate | 30 fps |
+| Duration | 525 frames (17.5 seconds) |
+| Composition ID | `MyComp` |
 
----
+The scene order and timings are defined in `src/Composition.tsx`:
 
-# 2. Production Pipeline
+| Frames | Scene |
+| --- | --- |
+| 0-55 | Intro and headline |
+| 45-105 | Initial coffee carousel |
+| 105-180 | Paris transition |
+| 180-220 | Carousel |
+| 225-315 | Reykjavik transition |
+| 315-340 | Carousel |
+| 340-480 | New York transition |
+| 480-525 | Outro |
 
-The project uses a hybrid production workflow rather than generating the entire advertisement with a single generative model.
+Some scenes intentionally overlap to make the handoffs feel continuous. If a scene duration changes, update both its `Sequence` and `durationInFrames` in `src/Root.tsx`.
 
-The pipeline is:
+## Project Layout
 
-Concept / storyboard
-        ↓
-Product & UI asset preparation
-        ↓
-AI destination keyframe generation
-        ↓
-Image-to-video generation
-        ↓
-Remotion animation
-        ↓
-Video compositing
-        ↓
-Programmatic camera adjustments
-        ↓
-Visual finishing
-        ↓
-Final render
-
-This approach keeps important brand and UI elements deterministic while using generative AI primarily for environmental imagery and cinematic motion.
-
----
-
-# 3. Concept and Storyboard
-
-The central concept was built around the Finnish line:
-
-**"Kahvi kutsuu, mutta minne?"**
-
-("Coffee calls, but where?")
-
-The coffee collection is presented as a series of destinations.
-
-Instead of creating a conventional product montage, the advertisement uses a fictional shopping interface where the viewer appears to browse different Paulig City coffees.
-
-The basic interaction is:
-
-1. Opening coffee scene
-2. "Kahvi kutsuu, mutta minne?"
-3. City coffee carousel appears
-4. Cursor browses the products
-5. A city is selected
-6. Product card expands
-7. Card transforms into a cinematic destination
-8. Return to the product interface
-9. Continue browsing to another destination
-
-The destination sequences created for the prototype include Reykjavík, New York and Paris.
-
----
-
-# 4. Asset Preparation
-
-The project separates assets according to their role.
-
-Example structure:
-
-public/
-├── packages/
-│   ├── reykjavik.png
-│   ├── new-york.png
-│   ├── parisien.png
-│   └── ...
-│
-├── videos/
-│   ├── reykjavik.mp4
-│   ├── new-york.mp4
-│   └── paris.mp4
-│
-├── ui/
-│   ├── searchbar.png
-│   └── k-ruoka-logo.png
-│
-├── icons/
-│   └── cursor.png
-│
-└── intro/
-    └── coffee.png
-
-The actual coffee packages remain separate image assets rather than being generated into the AI video.
-
-This is important because generative video models can distort packaging, typography and logos between frames.
-
-Brand-sensitive assets are therefore composited in Remotion instead.
-
----
-
-# 5. AI Image Creation
-
-## Tool
-
-**ChatGPT / OpenAI image generation**
-
-AI image generation was used to create the starting visual for each destination.
-
-Rather than asking the video model to invent an entire scene, a carefully composed still image was first created.
-
-This provides greater control over:
-
-- composition
-- product placement
-- lighting
-- camera angle
-- visual hierarchy
-- city identity
-- position of important objects
-
-The generated image then becomes the first frame for the video generation stage.
-
----
-
-## Reykjavík
-
-The Reykjavík scene was designed around:
-
-- Icelandic geothermal lagoon
-- pale blue geothermal water
-- dark volcanic rock
-- cool overcast atmosphere
-- minimal distant bathers
-- coffee prominently positioned in the foreground
-
-The coffee acts as the foreground anchor while the lagoon establishes the destination.
-
-The generated still was intentionally composed vertically for the final 9:16 format.
-
----
-
-## New York
-
-The New York image was designed around:
-
-- yellow NYC taxi
-- Manhattan street environment
-- coffee held outside the taxi window
-- dense urban depth
-- background traffic
-- recognizable New York visual language
-
-The composition places the coffee close to the camera while the taxi and street establish the city.
-
-This allows the coffee to remain the visual anchor even when the environment becomes animated.
-
----
-
-## Paris
-
-The Paris keyframe was developed iteratively.
-
-The final composition included:
-
-- foreground café table
-- black coffee
-- croissant
-- café tableware
-- second coffee
-- sweater draped over a chair
-- Parisian street visible behind the table
-- Haussmann-style architecture
-- shallow depth of field
-
-The sweater and second coffee were added as small environmental storytelling details suggesting that the table is occupied without requiring visible people or faces.
-
----
-
-# 6. Image-to-Video Generation
-
-## Tool
-
-**Google Flow — Veo 3.1**
-
-The generated still images were imported into Google Flow and animated using Veo's image-to-video workflow.
-
-The still image defines the visual composition while the prompt primarily defines **motion**.
-
-This separation is important.
-
-Instead of repeatedly describing the entire scene, motion prompts focus on:
-
-- camera movement
-- environmental movement
-- object movement
-- motion intensity
-- elements that must remain stable
-
----
-
-# 7. Reykjavík Video Generation
-
-The Reykjavík animation was intentionally restrained.
-
-Requested motion included:
-
-- extremely slow camera push
-- very small natural water ripples
-- sparse geothermal mist
-- subtle coffee steam
-- minimal movement from distant bathers
-
-The prompt explicitly avoided:
-
-- large waves
-- aggressive steam
-- fast camera movement
-- dramatic environmental changes
-- new objects
-
-This was necessary because early generations produced excessive lagoon and steam movement.
-
-The final approach used AI video for subtle environmental motion while additional pacing and framing adjustments were performed later in Remotion.
-
----
-
-# 8. New York Video Generation
-
-The New York animation uses more environmental movement than Reykjavík.
-
-Requested motion included:
-
-- taxi moving slowly through traffic
-- background vehicles moving naturally
-- subtle movement from flags and trees
-- stable passenger hand
-- stable coffee cup
-- slow cinematic push toward the coffee
-
-The coffee and hand were intentionally instructed to remain relatively stable because generative video models can introduce visible artifacts when hands or small objects move excessively.
-
-This produces a different motion language for each destination:
-
-Reykjavík → calm / atmospheric
-
-New York → active / urban
-
-while keeping coffee as the visual anchor.
-
----
-
-# 9. Paris Video Generation
-
-The Paris sequence uses foreground action rather than primarily environmental movement.
-
-Veo was instructed to animate:
-
-- coffee being poured into the second cup
-- subtle café activity
-- a cyclist travelling away into the street
-- limited distant pedestrian movement
-- gentle environmental movement
-
-Faces were intentionally avoided.
-
-The cyclist moves deeper into the street rather than across the foreground so that background movement adds depth without competing with the coffee-pouring action.
-
-The main visual hierarchy remains:
-
-coffee → table → Paris environment.
-
----
-
-# 10. Remotion Video Architecture
-
-## Tool
-
-**Remotion + React + TypeScript**
-
-Remotion is used as the main animation and compositing environment.
-
-Instead of editing the advertisement manually on a traditional video timeline, scenes are implemented as React components and controlled frame-by-frame.
-
-Example structure:
-
+```text
 src/
-├── components/
-│   ├── Intro.tsx
-│   ├── CoffeeCup.tsx
-│   ├── SearchBar.tsx
-│   ├── CityCard.tsx
-│   ├── CityCarousel.tsx
-│   ├── ReykjavikTransition.tsx
-│   ├── NewYorkTransition.tsx
-│   └── ParisTransition.tsx
-│
-├── data/
-│   └── cities.ts
-│
-├── Composition.tsx
-├── Root.tsx
-└── index.ts
+  Composition.tsx       Scene timeline
+  Root.tsx              Remotion composition settings
+  components/           UI, carousel, intro/outro, and city transitions
+  data/cities.ts        City coffee card data
+  data/motion.ts        Shared motion helpers
+public/
+  packages/             Product package PNGs
+  videos/               Destination MP4s
+  icons/                Cursor, search bar, logo, and intro imagery
+```
 
----
+Use `staticFile()` for anything in `public/`. City cards are data-driven through `src/data/cities.ts`; add or change products there before changing carousel presentation code.
 
-# 11. Data-Driven City Cards
+## Animation Notes
 
-Coffee information is stored separately from the visual components.
+- Remotion animations are frame-based, using `useCurrentFrame()` and `interpolate()`.
+- Cursor positions use screen-center-relative offsets. Transition exit positions should align with the next carousel entry position to avoid visible jumps.
+- Product packages remain independent PNG overlays during transitions so brand text and packaging stay stable while cards expand into video.
+- The shared `SearchBar` is rendered persistently in `Composition.tsx`; scene-level instances support the intro and transitions where needed.
 
-Example:
+## Asset and AI Workflow
 
-```ts
-export type City = {
-  id: string;
-  city: string;
-  roast: string;
-  tastingNote: string;
-  color: string;
-  textColor: string;
-  packageSrc: string;
-};
+Product/UI assets are composed deterministically in Remotion. Destination keyframes were generated with OpenAI image generation, then animated with Google Flow / Veo 3.1 image-to-video. This keeps packaging, logos, typography, and UI consistent while AI video supplies environmental motion.
+
+The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
