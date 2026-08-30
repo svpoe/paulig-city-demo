@@ -21,29 +21,20 @@ Product/UI assets are composed deterministically in Remotion. Destination keyfra
 
 The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
 
-## Composition
+## Technical Stack
 
-| Property | Value |
-| --- | --- |
-| Format | 1080 x 1920 (9:16) |
-| Frame rate | 30 fps |
-| Duration | 525 frames (17.5 seconds) |
-| Composition ID | `MyComp` |
+| Stage | Tool / Technology | Purpose |
+|---|---|---|
+| Concept development | ChatGPT | Creative direction, storyboard development, prompt iteration |
+| Image generation & editing | ChatGPT / OpenAI image generation | Creation and modification of photorealistic destination keyframes |
+| Image-to-video | Google Flow / Veo 3.1 | Animation of generated keyframes into realistic destination footage |
+| Motion graphics | Remotion | Programmatic animation, carousel movement, transitions, cursor interactions |
+| UI composition | React + TypeScript | Construction of reusable UI and visual components |
+| Video compositing | Remotion | Combining AI video, product assets, browser UI and animation |
+| Final visual treatment | CSS / Remotion | Cropping, zooms, brightness adjustments, grain and other finishing effects |
+| Version control | Git | Tracking source-code development and iterations |
 
-The scene order and timings are defined in `src/Composition.tsx`:
-
-| Frames | Scene |
-| --- | --- |
-| 0-55 | Intro and headline |
-| 45-105 | Initial coffee carousel |
-| 105-180 | Paris transition |
-| 180-220 | Carousel |
-| 225-315 | Reykjavik transition |
-| 315-340 | Carousel |
-| 340-480 | New York transition |
-| 480-525 | Outro |
-
-Some scenes intentionally overlap to make the handoffs feel continuous. If a scene duration changes, update both its `Sequence` and `durationInFrames` in `src/Root.tsx`.
+---
 
 ## Project Layout
 
