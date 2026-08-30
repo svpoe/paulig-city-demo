@@ -35,9 +35,9 @@ export const SearchBar = () => {
         src={staticFile("icons/k-ruoka-logo.png")}
         style={{
           position: "absolute",
-          top: "2%",
+          top: "1.8%",
           right: "4%",
-          width: 160,
+          width: 190,
           objectFit: "contain",
           zIndex: 30,
         }}

@@ -12,7 +12,7 @@ export const Intro = () => {
 
   const opacity = interpolate(
     frame,
-    [0, 12, 30, 38],
+    [0, 12, 40, 48],
     [0, 1, 1, 0],
     {
       extrapolateLeft: "clamp",
@@ -69,14 +69,14 @@ export const Intro = () => {
             letterSpacing: -2,
           }}
         >
-          Kahvi kutsuu,
+          Kahvi kutsuu.
           <div
             style={{
               opacity: questionOpacity,
               transform: `translateY(${questionTranslateY}px)`,
             }}
           >
-            mutta minne?
+            Mutta minne?
           </div>
         </div>
       </div>

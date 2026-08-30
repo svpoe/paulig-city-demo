@@ -11,44 +11,44 @@ export const MyComposition = () => {
   return (
     <AbsoluteFill style={{backgroundColor: "#f4efe7"}}>
 
-      {/* INTRO: frames 0–45 */}
-      <Sequence durationInFrames={45}>
+      {/* INTRO: frames 0–55 */}
+      <Sequence durationInFrames={55}>
         <Intro />
       </Sequence>
 
-      {/* FIRST CAROUSEL: frames 35–95 */}
-      <Sequence from={35} durationInFrames={60}>
+      {/* FIRST CAROUSEL: frames 45–105 */}
+      <Sequence from={45} durationInFrames={60}>
         <CityCarousel selectedIndex={6} entersFromBack={false} />
       </Sequence>
 
-      {/* PARIS: frames 95–170 */}
-      <Sequence from={95} durationInFrames={75}>
+      {/* PARIS: frames 105–180 */}
+      <Sequence from={105} durationInFrames={75}>
         <ParisTransition durationInFrames={75} />
       </Sequence>
 
-      {/* SECOND CAROUSEL: frames 170–210 */}
-      <Sequence from={170} durationInFrames={45}>
+      {/* SECOND CAROUSEL: frames 180–220 */}
+      <Sequence from={180} durationInFrames={45}>
         <CityCarousel selectedIndex={3} fromIndex={6} />
       </Sequence>
 
-      {/* REYKJAVÍK: frames 215–305 */}
-      <Sequence from={215} durationInFrames={90}>
+      {/* REYKJAVÍK: frames 225–315 */}
+      <Sequence from={225} durationInFrames={90}>
         <ReykjavikTransition durationInFrames={90} />
       </Sequence>
 
-      {/* THIRD CAROUSEL: frames 305–330 */}
-      <Sequence from={305} durationInFrames={25}>
+      {/* THIRD CAROUSEL: frames 315–340 */}
+      <Sequence from={315} durationInFrames={25}>
         <CityCarousel selectedIndex={7} fromIndex={3} />
       </Sequence>
 
 
-      {/* NEW YORK: frames 330–470 */}
-      <Sequence from={330} durationInFrames={140}>
+      {/* NEW YORK: frames 340–480 */}
+      <Sequence from={340} durationInFrames={140}>
         <NewYorkTransition />
       </Sequence>
 
-      {/* OUTRO: frames 470–515 */}
-      <Sequence from={470} durationInFrames={45}>
+      {/* OUTRO: frames 480–525 */}
+      <Sequence from={480} durationInFrames={45}>
         <Outro />
       </Sequence>
 

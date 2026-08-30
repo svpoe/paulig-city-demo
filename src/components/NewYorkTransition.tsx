@@ -14,6 +14,22 @@ export const NewYorkTransition = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
 
+  // Enter above and left of the package, then land at its center before expansion.
+  const cursorX = interpolate(frame, [0, 18], [-116, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const cursorY = interpolate(frame, [0, 18], [-98, -50], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const cursorOpacity = interpolate(frame, [27, 34], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
   // Expansion starts after click
   const progress = interpolate(
     frame,
@@ -233,6 +249,25 @@ const videoZoom = interpolate(
           </div>
         </div>
       </div>
+
+      {/* Cursor remains over the package through the click, then disappears as New York appears. */}
+      <Img
+        src={staticFile("icons/cursor.png")}
+        style={{
+          position: "absolute",
+          width: 44,
+          left: "50%",
+          top: "50%",
+          opacity: cursorOpacity,
+          zIndex: 3,
+          transform: `
+            translate(
+              calc(-50% + ${cursorX}px),
+              calc(-50% + ${cursorY}px)
+            )
+          `,
+        }}
+      />
 
       {/* Closing headline, matching the Intro's font */}
       <div
