@@ -15,6 +15,12 @@ npm run build
 
 `npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
+## Asset and AI Workflow
+
+Product/UI assets are composed deterministically in Remotion. Destination keyframes were generated with OpenAI image generation with real images of the locations as reference, then animated with Google Flow / Veo 3.1 image-to-video. This keeps packaging, logos, typography, and UI consistent while AI video supplies environmental motion.
+
+The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
+
 ## Composition
 
 | Property | Value |
@@ -63,8 +69,3 @@ Use `staticFile()` for anything in `public/`. City cards are data-driven through
 - Product packages remain independent PNG overlays during transitions so brand text and packaging stay stable while cards expand into video.
 - The shared `SearchBar` is rendered persistently in `Composition.tsx`; scene-level instances support the intro and transitions where needed.
 
-## Asset and AI Workflow
-
-Product/UI assets are composed deterministically in Remotion. Destination keyframes were generated with OpenAI image generation, then animated with Google Flow / Veo 3.1 image-to-video. This keeps packaging, logos, typography, and UI consistent while AI video supplies environmental motion.
-
-The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
