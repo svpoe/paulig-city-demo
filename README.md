@@ -19,9 +19,9 @@ npm run build
 
 `npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
-## Reaason for Determenistic + Generative Workflow
+## Reason for Determenistic + Generative Workflow
 
-The production pipeline separates generative and deterministic elements based on their strengths. Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
+Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
 
 Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
 
