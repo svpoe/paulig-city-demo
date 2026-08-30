@@ -8,16 +8,6 @@ Product/UI assets are composed deterministically in Remotion. Destination keyfra
 
 The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
 
-## Run and Render
-
-```bash
-npm install
-npm run dev
-npm run lint
-npm run build
-```
-
-`npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
 ## Reason for Determenistic + Generative Workflow
 
@@ -38,6 +28,17 @@ Destination scenes use image-to-video rather than text-to-video. Establishing an
 
 
 ---
+
+## Run and Render
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+`npm run dev` opens Remotion Studio. Use composition `MyComp` for preview and render. `npm run build` creates a Remotion bundle; render the bundle with the Remotion CLI or Studio.
 
 ## Project Layout
 
