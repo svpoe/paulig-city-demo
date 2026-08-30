@@ -63,3 +63,20 @@ Use `staticFile()` for anything in `public/`. City cards are data-driven through
 Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
 
 Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
+
+
+### Images Used
+
+Coffee cup
+https://img.ilcdn.fi/8ho3fyfu-EOo8sz_tERIg-UWh6U=/full-fit-in/920x0/img-s3.ilcdn.fi/414aee0fa674c6c855b84b89b793fa94c267b1929c286f706f247620913d26ec.jpg
+
+
+Sky lagoon
+https://images.vs-static.com/6IQ9B2HP7ZohjZFyzy1_j1BDUNw=/250x0:750x667/750x0/Sky_Lagoon_d555f837ed/Sky_Lagoon_d555f837ed.jpg 
+
+Paris cafe
+https://everydayparisian.com/wp-content/uploads/2024/06/les-deux-margots-paris-cafe-breakfast-683x1024.jpg 
+
+
+New York
+https://images.unsplash.com/photo-1750515590085-5067fa4423fd?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 
