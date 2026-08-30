@@ -49,7 +49,7 @@ export const CityCarousel = ({selectedIndex, fromIndex = 0}: Props) => {
   // TIMING
   // -------------------------
 
-  const scrollEnd = 45;
+  const scrollEnd = 55;
 
   const targetOvershoot = -80 * direction;
 

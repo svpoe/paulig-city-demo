@@ -121,7 +121,7 @@ export const ParisTransition = () => {
   const videoZoom = interpolate(
     frame,
     [42, 90],
-    [1.26, 1.38],
+    [1.32, 1.44],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -173,7 +173,7 @@ export const ParisTransition = () => {
             opacity: videoOpacity,
             transform: `scale(${videoZoom})`,
             transformOrigin: "70% 70%",
-            filter: "brightness(0.82)",
+            filter: "brightness(0.72)",
           }}
         />
 

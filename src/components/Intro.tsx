@@ -1,8 +1,6 @@
 import {
   AbsoluteFill,
-  Img,
   interpolate,
-  staticFile,
   useCurrentFrame,
 } from "remotion";
 
@@ -26,16 +24,6 @@ export const Intro = () => {
     frame,
     [0, 18],
     [30, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  const cursorX = interpolate(
-    frame,
-    [12, 30],
-    [0, 35],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
