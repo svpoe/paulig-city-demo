@@ -12,38 +12,6 @@ export const NewYorkTransition = () => {
   const frame = useCurrentFrame();
   const {width, height} = useVideoConfig();
 
-  // Cursor moves onto card
-  const cursorX = interpolate(
-    frame,
-    [0, 18],
-    [-280, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  const cursorY = interpolate(
-    frame,
-    [0, 18],
-    [220, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  // Click pulse
-  const clickScale = interpolate(
-    frame,
-    [18, 21, 24],
-    [1, 0.8, 1],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
   // Expansion starts after click
   const progress = interpolate(
     frame,
@@ -105,16 +73,6 @@ const videoZoom = interpolate(
   const packageOpacity = interpolate(
     frame,
     [24, 34],
-    [1, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  const cursorOpacity = interpolate(
-    frame,
-    [26, 35],
     [1, 0],
     {
       extrapolateLeft: "clamp",
@@ -286,28 +244,6 @@ const videoZoom = interpolate(
           Sinä päätät.
         </div>
       </div>
-
-      {/* Mouse */}
-      <Img
-        src={staticFile("icons/cursor.png")}
-        style={{
-          position: "absolute",
-          width: 80,
-
-          left: "50%",
-          top: "50%",
-
-          opacity: cursorOpacity,
-
-          transform: `
-            translate(
-              calc(-50% + ${cursorX}px),
-              calc(-50% + ${cursorY}px)
-            )
-            scale(${clickScale})
-          `,
-        }}
-      />
     </AbsoluteFill>
   );
 };

@@ -8,7 +8,13 @@ import {
   useVideoConfig,
 } from "remotion";
 
-export const ParisTransition = () => {
+import {getBackButtonOffset} from "../data/motion";
+
+type Props = {
+  durationInFrames: number;
+};
+
+export const ParisTransition = ({durationInFrames}: Props) => {
   const frame = useCurrentFrame();
   const {width, height, fps} = useVideoConfig();
 
@@ -27,17 +33,6 @@ export const ParisTransition = () => {
     frame,
     [0, 18],
     [220, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }
-  );
-
-  // Click pulse
-  const clickScale = interpolate(
-    frame,
-    [18, 21, 24],
-    [1, 0.8, 1],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -116,6 +111,46 @@ export const ParisTransition = () => {
       extrapolateRight: "clamp",
     }
   );
+
+  // Cursor returns to click the back button before the scene cuts,
+  // ending exactly where the next carousel's cursor begins
+  const backButtonOffset = getBackButtonOffset(width, height);
+  const exitStart = durationInFrames - 22;
+
+  const exitCursorX = interpolate(
+    frame,
+    [exitStart, exitStart + 10],
+    [0, backButtonOffset.x],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  const exitCursorY = interpolate(
+    frame,
+    [exitStart, exitStart + 10],
+    [0, backButtonOffset.y],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  const exitCursorOpacity = interpolate(
+    frame,
+    [exitStart, exitStart + 6],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  const displayCursorX = frame < exitStart ? cursorX : exitCursorX;
+  const displayCursorY = frame < exitStart ? cursorY : exitCursorY;
+  const displayCursorOpacity =
+    frame < exitStart ? cursorOpacity : exitCursorOpacity;
 
   // Gentle zoom toward coffee area
   const videoZoom = interpolate(
@@ -261,14 +296,13 @@ export const ParisTransition = () => {
           left: "50%",
           top: "50%",
 
-          opacity: cursorOpacity,
+          opacity: displayCursorOpacity,
 
           transform: `
             translate(
-              calc(-50% + ${cursorX}px),
-              calc(-50% + ${cursorY}px)
+              calc(-50% + ${displayCursorX}px),
+              calc(-50% + ${displayCursorY}px)
             )
-            scale(${clickScale})
           `,
         }}
       />

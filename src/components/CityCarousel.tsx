@@ -9,6 +9,7 @@ import {
 } from "remotion";
 
 import {cities} from "../data/cities";
+import {getBackButtonOffset} from "../data/motion";
 import {CityCard} from "./CityCard";
 import {CoffeeCup} from "./CoffeeCup";
 
@@ -19,11 +20,16 @@ const STEP = CARD_WIDTH + GAP;
 type Props = {
   selectedIndex: number;
   fromIndex?: number;
+  entersFromBack?: boolean;
 };
 
-export const CityCarousel = ({selectedIndex, fromIndex = 0}: Props) => {
+export const CityCarousel = ({
+  selectedIndex,
+  fromIndex = 0,
+  entersFromBack = true,
+}: Props) => {
   const frame = useCurrentFrame();
-  const {fps, width} = useVideoConfig();
+  const {fps, width, height} = useVideoConfig();
 
   const startIndex = fromIndex;
 
@@ -101,19 +107,39 @@ export const CityCarousel = ({selectedIndex, fromIndex = 0}: Props) => {
   // CURSOR MOVEMENT
   // -------------------------
 
-  const cursorX = interpolate(
+  // Entry point matches where the previous city view's cursor clicked
+  // the back button, so the cursor never jumps between cuts
+  const backButtonOffset = getBackButtonOffset(width, height);
+  const entryOffset = entersFromBack
+    ? backButtonOffset
+    : {x: 260, y: 220};
+
+  const clickWindowStart = scrollEnd - 10;
+
+  const cursorOffsetX = interpolate(
     frame,
-    [0, scrollEnd],
-    [180, -320],
+    [0, clickWindowStart],
+    [entryOffset.x, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     }
   );
 
+  const cursorOffsetY = interpolate(
+    frame,
+    [0, clickWindowStart],
+    [entryOffset.y, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }
+  );
+
+  // Click pulse once the cursor lands on the selected card
   const cursorOpacity = interpolate(
     frame,
-    [scrollEnd, scrollEnd + 20],
+    [scrollEnd, scrollEnd + 12],
     [1, 0],
     {
       extrapolateLeft: "clamp",
@@ -206,26 +232,23 @@ export const CityCarousel = ({selectedIndex, fromIndex = 0}: Props) => {
       </div>
 
       {/* CURSOR */}
-      <div
+      <Img
+        src={staticFile("icons/cursor.png")}
         style={{
           position: "absolute",
-          left: "55%",
-          top: "65%",
-          transform: `
-            translateX(${cursorX}px)
-            rotate(-8deg)
-          `,
+          width: 80,
+          left: "50%",
+          top: "50%",
+          opacity: cursorOpacity,
           zIndex: 3,
+          transform: `
+            translate(
+              calc(-50% + ${cursorOffsetX}px),
+              calc(-50% + ${cursorOffsetY}px)
+            )
+          `,
         }}
-      >
-        <Img
-          src={staticFile("icons/cursor.png")}
-          style={{
-            width: 80,
-            opacity: cursorOpacity,
-          }}
-        />
-      </div>
+      />
 
       {/* <Img
         src={staticFile("icons/cursor.png")}

@@ -18,12 +18,12 @@ export const MyComposition = () => {
 
       {/* FIRST CAROUSEL: frames 35–95 */}
       <Sequence from={35} durationInFrames={60}>
-        <CityCarousel selectedIndex={6} />
+        <CityCarousel selectedIndex={6} entersFromBack={false} />
       </Sequence>
 
       {/* PARIS: frames 95–170 */}
       <Sequence from={95} durationInFrames={75}>
-        <ParisTransition />
+        <ParisTransition durationInFrames={75} />
       </Sequence>
 
       {/* SECOND CAROUSEL: frames 170–210 */}
@@ -33,7 +33,7 @@ export const MyComposition = () => {
 
       {/* REYKJAVÍK: frames 215–305 */}
       <Sequence from={215} durationInFrames={90}>
-        <ReykjavikTransition />
+        <ReykjavikTransition durationInFrames={90} />
       </Sequence>
 
       {/* THIRD CAROUSEL: frames 305–330 */}
