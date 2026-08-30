@@ -9,17 +9,11 @@ Product/UI assets are composed deterministically in Remotion. Destination keyfra
 The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
 
 
-## Reason for Determenistic + Generative Workflow
-
-Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
-
-Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
-
 ## Technical Stack
 
 | Stage | Tool / Technology | Purpose |
 |---|---|---|
-| Image generation & editing | ChatGPT / OpenAI image generation | Creation and modification of photorealistic destination keyframes |
+| Image generation & editing | ChatGPT / OpenAI image generation | Creation and modification of photorealistic destination keyframes based on real images|
 | Image-to-video | Google Flow / Veo 3.1 | Animation of generated keyframes into realistic destination footage |
 | Motion graphics | Remotion | Programmatic animation, carousel movement, transitions, cursor interactions |
 | UI composition | React + TypeScript | Construction of reusable UI and visual components |
@@ -64,3 +58,8 @@ Use `staticFile()` for anything in `public/`. City cards are data-driven through
 - Product packages remain independent PNG overlays during transitions so brand text and packaging stay stable while cards expand into video.
 - The shared `SearchBar` is rendered persistently in `Composition.tsx`; scene-level instances support the intro and transitions where needed.
 
+## Reason for Determenistic + Generative Workflow
+
+Product packaging, typography, UI, cursor interactions, and transitions are built programmatically in Remotion because these elements require precise positioning and frame-to-frame consistency—areas where generative video can introduce text distortion, object changes, or visual drift.
+
+Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
