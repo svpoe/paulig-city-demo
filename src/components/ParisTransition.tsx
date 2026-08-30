@@ -19,11 +19,11 @@ export const ParisTransition = ({durationInFrames}: Props) => {
   const frame = useCurrentFrame();
   const {width, height, fps} = useVideoConfig();
 
-  // Cursor moves onto card
+  // Cursor moves slightly down and left from the center.
   const cursorX = interpolate(
     frame,
-    [0, 18],
-    [-280, 0],
+    [0, 18], //animate from local scene frame 0 to frame 18
+    [0, 15], //ending 20px left
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -33,7 +33,7 @@ export const ParisTransition = ({durationInFrames}: Props) => {
   const cursorY = interpolate(
     frame,
     [0, 18],
-    [220, 0],
+    [0, 60], //ending 60px down
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",

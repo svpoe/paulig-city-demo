@@ -23,7 +23,7 @@ export const ReykjavikTransition = ({durationInFrames}: Props) => {
   const cursorX = interpolate(
     frame,
     [0, 18],
-    [-280, 0],
+    [280, 30], 
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -33,7 +33,7 @@ export const ReykjavikTransition = ({durationInFrames}: Props) => {
   const cursorY = interpolate(
     frame,
     [0, 18],
-    [220, 0],
+    [0, 30],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
