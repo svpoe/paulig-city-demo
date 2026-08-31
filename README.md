@@ -67,7 +67,7 @@ Product packaging, typography, UI, cursor interactions, and transitions are buil
 Destination scenes use image-to-video rather than text-to-video. Establishing and refining a still keyframe first gives direct control over composition, coffee placement, lighting, and city identity before motion is introduced. Veo is then used primarily for what generative video handles well: natural environmental and cinematic motion. This reduces unpredictable generation and makes the final result easier to art-direct, reproduce, and integrate with exact brand assets.
 
 
-### Image References
+### Reference Images
 
 Coffee cup
 https://img.ilcdn.fi/8ho3fyfu-EOo8sz_tERIg-UWh6U=/full-fit-in/920x0/img-s3.ilcdn.fi/414aee0fa674c6c855b84b89b793fa94c267b1929c286f706f247620913d26ec.jpg
