@@ -8,6 +8,8 @@ Product/UI assets are composed deterministically in Remotion. Destination keyfra
 
 The destinations are Paris, Reykjavik, and New York. Preserve vertical framing and use restrained video motion so coffee remains the visual focus.
 
+## Video Link
+https://github.com/svpoe/paulig-city-demo/blob/5017f2b1459e020254e7574bfdae99cf73a12d56/paulig-city-series-demo.mp4
 
 ## Technical Stack
 
